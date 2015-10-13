@@ -5,6 +5,9 @@ var defaultsDeep = require('lodash.defaultsdeep');
 var autoprefixer = require('gulp-autoprefixer');
 var notifier = require('node-notifier');
 var sourcemaps = require('gulp-sourcemaps');
+var filter = require('gulp-filter');
+var sass = require('gulp-sass');
+
 
 module.exports = function (gulp, gulpConfig) {
 
@@ -44,7 +47,7 @@ module.exports = function (gulp, gulpConfig) {
         return !/^_/.test(path.basename(file.path));
       }))
       .pipe(sourcemaps.init())
-      .pipe(sass(config.sassOptions).on('error', sass.logError)
+      .pipe(sass(config.sassOptions).on('error', sass.logError))
       .pipe(autoprefixer(config.autoprefixerOptions))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(path.join(gulpConfig.basePath, config.dest)))
@@ -56,7 +59,5 @@ module.exports = function (gulp, gulpConfig) {
           sound: false
         });
       });
-    });
-  };
-
+  });
 };
