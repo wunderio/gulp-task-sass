@@ -1,11 +1,10 @@
-Gulp task boilerplate
+Gulp task for SCSS style SASS compilation
 =================
 
-> A gulp task boilerplate to pack several tasks into one node module.
 
 ## Installation
 ```sh
-npm install --save-dev wunderkraut/gulp-task-boilerplate
+npm install --save-dev wunderkraut/gulp-task-sass
 ```
 
 ## Usage
@@ -17,7 +16,7 @@ npm install --save-dev wunderkraut/gulp-task-boilerplate
 var gulp = require('gulp')
 
 // Require task module and pass gulp to provide the gulp tasks.
-require('gulp-task-boilerplate')(gulp)
+require('gulp-task-sass')(gulp)
 ```
 
 ### Advanced usage
@@ -29,7 +28,7 @@ var gulp = require('gulp')
 var gulpConfig = require('./gulpconfig')
 
 // Just pass the configuration object as second parameter.
-require('gulp-task-boilerplate')(gulp, gulpConfig)
+require('gulp-task-sass')(gulp, gulpConfig)
 ```
 
 #### gulpconfig.js
@@ -41,14 +40,26 @@ module.exports = {
   basePath: '.',
 
   // Overwrite default configurations.
-  configurationKey: {
-    key: 'value',
-    src: path.join('some', 'source', 'folder', '*'),
-    dest: path.join('some', 'destination', 'folder', '*')
+  stylesheets: {
+    src: '/sass/**/*.scss',
+    dest: '/css',
+    sassOptions: {
+      includePaths: [
+        path.join(gulpConfig.basePath, '/vendor')
+      ]
+    },
+    autoprefixerOptions: {
+      browsers: ['last 2 versions'],
+      cascade: false
+    },
+    notify: {
+      title: 'YOURTITLE',
+      message: 'SASS compiled.'
+    }
   }
 }
 ```
 
 ## Contributing
 
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/wunderkraut/gulp-task-boilerplate/issues/new).
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/wunderkraut/gulp-task-sass/issues/new).
