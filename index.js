@@ -7,7 +7,9 @@ var notifier = require('node-notifier');
 var sourcemaps = require('gulp-sourcemaps');
 var filter = require('gulp-filter');
 var sass = require('gulp-sass');
-
+var watch = require('gulp-watch');
+var batch = require('gulp-batch');
+var del = require('del');
 
 module.exports = function (gulp, gulpConfig) {
 
@@ -35,9 +37,20 @@ module.exports = function (gulp, gulpConfig) {
   };
 
   var config = defaultsDeep(gulpConfig, defaultConfig).stylesheets;
+
   // Default watch task.
-  gulp.task('sass-watch', ['sass'], function () {
-    gulp.watch(path.join(gulpConfig.basePath, config.src), ['sass'])
+  gulp.task('sass-watch', function () {
+    watch(path.join(gulpConfig.basePath, config.src), batch(function (events, done) {
+      gulp.start('sass', done);
+    }))
+      .on('add', function(path) {
+        this.close();
+        gulp.start('sass-watch');
+      })
+      .on('unlink', function(filepath) {
+        del(path.join(gulpConfig.basePath, config.dest));
+        gulp.start('sass');
+      });
   });
 
   // SASS with sourcemaps.

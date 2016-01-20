@@ -1,24 +1,69 @@
 {
-  "name": "gulp-task-sass",
-  "version": "0.0.2",
-  "description": "A gulp task to compile sass files.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wunderkraut/gulp-task-sass"
+  "_args": [
+    [
+      "gulp-task-sass@github:wunderkraut/gulp-task-sass",
+      "/Users/andi/workspace/avery-seed/web/themes/custom/adminx"
+    ]
+  ],
+  "_from": "wunderkraut/gulp-task-sass",
+  "_id": "gulp-task-sass@0.0.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/gulp-task-sass",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/wunderkraut/gulp-task-sass/master/package.json",
+      "gitUrl": "git://github.com/wunderkraut/gulp-task-sass.git",
+      "httpsUrl": "git+https://github.com/wunderkraut/gulp-task-sass.git",
+      "shortcut": "github:wunderkraut/gulp-task-sass",
+      "ssh": "git@github.com:wunderkraut/gulp-task-sass.git",
+      "sshUrl": "git+ssh://git@github.com/wunderkraut/gulp-task-sass.git",
+      "type": "github"
+    },
+    "name": "gulp-task-sass",
+    "raw": "gulp-task-sass@github:wunderkraut/gulp-task-sass",
+    "rawSpec": "github:wunderkraut/gulp-task-sass",
+    "scope": null,
+    "spec": "github:wunderkraut/gulp-task-sass",
+    "type": "hosted"
   },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "git://github.com/wunderkraut/gulp-task-sass.git#0891ab88edbbbdb665dd6d15ae80a3a1c981aff9",
+  "_shasum": "77bae949a048dabc246bb97bea4803ee86e83bea",
+  "_shrinkwrap": null,
+  "_spec": "gulp-task-sass@github:wunderkraut/gulp-task-sass",
+  "_where": "/Users/andi/workspace/avery-seed/web/themes/custom/adminx",
   "bugs": {
     "url": "https://github.com/wunderkraut/gulp-task-sass/issues"
   },
   "dependencies": {
+    "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
+    "gulp-batch": "^1.0.5",
     "gulp-filter": "^3.0.1",
     "gulp-sass": "^2.0.4",
+    "gulp-watch": "^4.3.5",
     "lodash.defaultsdeep": "^3.10.0",
     "node-notifier": "^4.3.1",
     "path": "^0.12.7"
   },
+  "description": "A gulp task to compile sass files.",
+  "devDependencies": {},
+  "gitHead": "0891ab88edbbbdb665dd6d15ae80a3a1c981aff9",
+  "homepage": "https://github.com/wunderkraut/gulp-task-sass#readme",
   "license": "MIT",
-  "devDependencies": {}
+  "main": "index.js",
+  "name": "gulp-task-sass",
+  "optionalDependencies": {},
+  "readme": "Gulp task for SCSS style SASS compilation\n=================\n\n\n## Installation\n```sh\nnpm install --save-dev wunderkraut/gulp-task-sass\n```\n\n## Usage\n\n### Basic usage\n\n```js\n// Require gulp.\nvar gulp = require('gulp')\n\n// Require task module and pass gulp to provide the gulp tasks.\nrequire('gulp-task-sass')(gulp)\n```\n\n### Advanced usage\nYou can also pass a configuration to the task. This allows you to overwrite the default configuration and provide other configuration like a base path for your files.\n\n#### gulpfile.js\n```js\nvar gulp = require('gulp')\nvar gulpConfig = require('./gulpconfig')\n\n// Just pass the configuration object as second parameter.\nrequire('gulp-task-sass')(gulp, gulpConfig)\n```\n\n#### gulpconfig.js\n```js\nvar path = require('path');\n\nmodule.exports = {\n  // Basic configuration.\n  basePath: '.',\n\n  // Overwrite default configurations.\n  stylesheets: {\n    src: '/sass/**/*.scss',\n    dest: '/css',\n    sassOptions: {\n      includePaths: [\n        path.join(gulpConfig.basePath, '/vendor')\n      ]\n    },\n    autoprefixerOptions: {\n      browsers: ['last 2 versions'],\n      cascade: false\n    },\n    notify: {\n      title: 'YOURTITLE',\n      message: 'SASS compiled.'\n    }\n  }\n}\n```\n\n## Contributing\n\nPull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/wunderkraut/gulp-task-sass/issues/new).\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wunderkraut/gulp-task-sass.git"
+  },
+  "version": "0.0.2"
 }
