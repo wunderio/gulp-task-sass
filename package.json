@@ -1,41 +1,4 @@
 {
-  "_args": [
-    [
-      "gulp-task-sass@github:wunderkraut/gulp-task-sass",
-      "/Users/andi/workspace/avery-seed/web/themes/custom/adminx"
-    ]
-  ],
-  "_from": "wunderkraut/gulp-task-sass",
-  "_id": "gulp-task-sass@0.0.2",
-  "_inCache": true,
-  "_installable": true,
-  "_location": "/gulp-task-sass",
-  "_phantomChildren": {},
-  "_requested": {
-    "hosted": {
-      "directUrl": "https://raw.githubusercontent.com/wunderkraut/gulp-task-sass/master/package.json",
-      "gitUrl": "git://github.com/wunderkraut/gulp-task-sass.git",
-      "httpsUrl": "git+https://github.com/wunderkraut/gulp-task-sass.git",
-      "shortcut": "github:wunderkraut/gulp-task-sass",
-      "ssh": "git@github.com:wunderkraut/gulp-task-sass.git",
-      "sshUrl": "git+ssh://git@github.com/wunderkraut/gulp-task-sass.git",
-      "type": "github"
-    },
-    "name": "gulp-task-sass",
-    "raw": "gulp-task-sass@github:wunderkraut/gulp-task-sass",
-    "rawSpec": "github:wunderkraut/gulp-task-sass",
-    "scope": null,
-    "spec": "github:wunderkraut/gulp-task-sass",
-    "type": "hosted"
-  },
-  "_requiredBy": [
-    "#DEV:/"
-  ],
-  "_resolved": "git://github.com/wunderkraut/gulp-task-sass.git#0891ab88edbbbdb665dd6d15ae80a3a1c981aff9",
-  "_shasum": "77bae949a048dabc246bb97bea4803ee86e83bea",
-  "_shrinkwrap": null,
-  "_spec": "gulp-task-sass@github:wunderkraut/gulp-task-sass",
-  "_where": "/Users/andi/workspace/avery-seed/web/themes/custom/adminx",
   "bugs": {
     "url": "https://github.com/wunderkraut/gulp-task-sass/issues"
   },
@@ -44,8 +7,10 @@
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-batch": "^1.0.5",
+    "gulp-changed": "^1.3.0",
     "gulp-filter": "^3.0.1",
     "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-watch": "^4.3.5",
     "lodash.defaultsdeep": "^3.10.0",
     "node-notifier": "^4.3.1",
@@ -65,5 +30,5 @@
     "type": "git",
     "url": "git+https://github.com/wunderkraut/gulp-task-sass.git"
   },
-  "version": "0.0.2"
+  "version": "0.0.3"
 }

@@ -8,8 +8,9 @@ var sourcemaps = require('gulp-sourcemaps');
 var filter = require('gulp-filter');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
-var batch = require('gulp-batch');
 var del = require('del');
+var gulpif = require('gulp-if');
+var changed = require('gulp-changed');
 
 module.exports = function (gulp, gulpConfig) {
 
@@ -33,60 +34,64 @@ module.exports = function (gulp, gulpConfig) {
         title: 'Wunderkraut',
         message: 'SASS compiled.'
       }
-    }
+    },
+    browserSync: false
   };
 
-  var config = defaultsDeep(gulpConfig, defaultConfig).stylesheets;
+  var config = defaultsDeep(gulpConfig, defaultConfig);
 
   // Default watch task.
   gulp.task('sass-watch', function () {
-    watch(path.join(gulpConfig.basePath, config.src), batch(function (events, done) {
-      gulp.start('sass', done);
-    }))
+    watch(path.join(config.basePath, config.stylesheets.src))
+      .on('change', function(path) {
+        gulp.start('sass');
+      })
       .on('add', function(path) {
         this.close();
         gulp.start('sass-watch');
       })
       .on('unlink', function(filepath) {
-        del(path.join(gulpConfig.basePath, config.dest));
+        del(path.join(gulpConfig.basePath, config.stylesheets.dest));
         gulp.start('sass');
       });
   });
 
   // SASS with sourcemaps.
   gulp.task('sass', function () {
-    return gulp.src(path.join(gulpConfig.basePath, config.src))
+    return gulp.src(path.join(config.basePath, config.stylesheets.src))
+      .pipe(sourcemaps.init())
+      .pipe(changed(path.join(config.basePath, config.stylesheets.dest), {extension: '.css'}))
       .pipe(filter(function (file) {
         return !/^_/.test(path.basename(file.path));
       }))
-      .pipe(sourcemaps.init())
-      .pipe(sass(config.sassOptions).on('error', sass.logError))
-      .pipe(autoprefixer(config.autoprefixerOptions))
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest(path.join(gulpConfig.basePath, config.dest)))
+      .pipe(sass(config.stylesheets.sassOptions).on('error', sass.logError))
+      .pipe(autoprefixer(config.stylesheets.autoprefixerOptions))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(path.join(config.basePath, config.stylesheets.dest)))
+      .pipe(gulpif(config.browserSync !== false, config.browserSync.stream({match: "**/*.css"})))
       .on('end', function () {
         notifier.notify({
-          title: config.notify.title,
-          message: config.notify.message,
-          icon: gulpConfig.notify.successIcon,
+          title: config.stylesheets.notify.title,
+          message: config.stylesheets.notify.message,
+          icon: config.notify.successIcon,
           sound: false
         });
       });
   });
   // SASS for production without sourcemaps.
   gulp.task('sass-production', function () {
-    return gulp.src(path.join(gulpConfig.basePath, config.src))
+    return gulp.src(path.join(config.basePath, config.stylesheets.src))
       .pipe(filter(function (file) {
         return !/^_/.test(path.basename(file.path));
       }))
       .pipe(sass(config.sassOptions).on('error', sass.logError))
-      .pipe(autoprefixer(config.autoprefixerOptions))
-      .pipe(gulp.dest(path.join(gulpConfig.basePath, config.dest)))
+      .pipe(autoprefixer(config.stylesheets.autoprefixerOptions))
+      .pipe(gulp.dest(path.join(config.basePath, config.stylesheets.dest)))
       .on('end', function () {
         notifier.notify({
-          title: config.notify.title,
-          message: config.notify.message,
-          icon: gulpConfig.notify.successIcon,
+          title: config.stylesheets.notify.title,
+          message: config.stylesheets.notify.message,
+          icon: config.notify.successIcon,
           sound: false
         });
       });
