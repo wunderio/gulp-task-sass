@@ -84,7 +84,7 @@ module.exports = function (gulp, gulpConfig) {
       .pipe(filter(function (file) {
         return !/^_/.test(path.basename(file.path));
       }))
-      .pipe(sass(config.sassOptions).on('error', sass.logError))
+      .pipe(sass(config.stylesheets.sassOptions).on('error', sass.logError))
       .pipe(autoprefixer(config.stylesheets.autoprefixerOptions))
       .pipe(gulp.dest(path.join(config.basePath, config.stylesheets.dest)))
       .on('end', function () {
